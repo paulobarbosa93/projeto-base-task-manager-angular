@@ -9,9 +9,39 @@
       <td>{{ task.id }}</td>
       <td>{{ task.title }}</td>
       <td>
-        <button class="btn btn-info">Detalhes</button>
-        <button class="btn btn-danger">Excluir</button>
+        <button class="btn btn-info" data-toggle="modal" data-target="#taskDetail" (click)="onSelect(task)">
+          <span class="glyphicon glyphicon-info-sign"></span>
+        </button>
+        <button class="btn btn-danger">
+          <span class="glyphicon glyphicon-trash"></span>
+        </button>
       </td>
     </tr>
   </tbody>
 </table>
+
+<!-- Modal -->
+<div class="modal fade" id="taskDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf="selectedTask">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Detalhes da Tarefa</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          <strong>ID: </strong> {{ selectedTask.id }}
+        </p>
+        <p>
+          <strong>Title: </strong> {{ selectedTask.title }}
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
