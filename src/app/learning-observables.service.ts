@@ -18,7 +18,53 @@ export class LearningObservables {
       }
     };
 
+    // this.http.get('api/tasks')
+    //   .subscribe(observer);
+
+    // this.http.get('api/tasks')
+    //   .subscribe({
+    //     next: function(newData){
+    //       console.log("Chamou o método next e passou como parâmetro o 'newData' => ", newData);
+    //     },
+    //     error: function(errorData){
+    //       console.log("Chamou o método error e passou como parâmetro o 'errorData' => ", errorData);
+    //     },
+    //     complete: function(){
+    //       console.log("Chamou o método complete e encerrou");
+    //     }
+    //   });
+
+    // this.http.get('api/tasks')
+    //   .subscribe(
+    //     function(newData){
+    //       console.log("Chamou o método next e passou como parâmetro o 'newData' => ", newData);
+    //     },
+    //     function(errorData){
+    //       console.log("Chamou o método error e passou como parâmetro o 'errorData' => ", errorData);
+    //     },
+    //     function(){
+    //       console.log("Chamou o método complete e encerrou");
+    //     }
+    //   );
+
+    // this.http.get('api/tasks')
+    //   .subscribe(
+    //     (newData) => {
+    //       console.log("Chamou o método next e passou como parâmetro o 'newData' => ", newData);
+    //     },
+    //     (errorData) => {
+    //       console.log("Chamou o método error e passou como parâmetro o 'errorData' => ", errorData);
+    //     },
+    //     () => {
+    //       console.log("Chamou o método complete e encerrou");
+    //     }
+    //   );
+
     this.http.get('api/tasks')
-      .subscribe(observer);
+      .subscribe(
+        newData => console.log("Chamou o método next e passou como parâmetro o 'newData' => ", newData),
+        errorData => console.log("Chamou o método error e passou como parâmetro o 'errorData' => ", errorData),
+        () => console.log("Chamou o método complete e encerrou")
+      );
   }
 }
