@@ -3,6 +3,8 @@ import { Http, Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/Observable/throw';
 
 import { Task } from './task.model';
 
@@ -15,17 +17,26 @@ export class TaskService {
 
   public getTasks(): Observable<Task[]> {
     return this.http.get(this.tasksUrl)
+      .catch(this.handlerErrors)
       .map((response: Response) => response.json().data as Task[]);
   }
 
   public getImportantTasks(): Observable<Task[]> {
-    return this.getTasks().map(tasks => tasks.slice(0, 3))
+    return this.getTasks()
+    .catch(this.handlerErrors)
+    .map(tasks => tasks.slice(0, 3));
   }
 
   public getTask(id: number): Observable<Task> {
     let url = `${this.tasksUrl}/${id}`;
 
     return this.http.get(url)
-      .map((response: Response) => response.json().data as Task)
+      .catch(this.handlerErrors)
+      .map((response: Response) => response.json().data as Task);
+  }
+
+  private handlerErrors(error: Response){
+    console.log('Salvando o erro em um arquivo de log =>', error);
+    return Observable.throw(error);
   }
 }

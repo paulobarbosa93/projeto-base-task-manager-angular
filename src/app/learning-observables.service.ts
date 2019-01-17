@@ -72,19 +72,19 @@ export class LearningObservables {
     //     () => console.log("Chamou o método complete e encerrou")
     //   );
 
-    this.http.get('api/taskss')
-      .catch(this.handlerErrors)
-      .subscribe({
-        next: function(newData) {
-          console.log("Chamou o método next e passou como parâmetro o 'newData' => ", newData);
-        },
-        error: function(errorData) {
-          console.log("Chamou o método error e passou como parâmetro o 'errorData' => ", errorData);
-        },
-        complete: function() {
-          console.log("Chamou o método complete e encerrou");
-        }
-      });
+    // this.http.get('api/taskss')
+    //   .catch(this.handlerErrors)
+    //   .subscribe({
+    //     next: function(newData) {
+    //       console.log("Chamou o método next e passou como parâmetro o 'newData' => ", newData);
+    //     },
+    //     error: function(errorData) {
+    //       console.log("Chamou o método error e passou como parâmetro o 'errorData' => ", errorData);
+    //     },
+    //     complete: function() {
+    //       console.log("Chamou o método complete e encerrou");
+    //     }
+    //   });
   }
 
   public handlerErrors(error: Response) {
