@@ -25,12 +25,24 @@ export class TaskDetailComponent implements OnInit {
     this.route.params
       .switchMap((params: Params) => this.taskService.getTask(+params['id']))
       .subscribe(
-        task => this.task = task,
-        error => alert('Ocorreu um erro no servidor, tente mais tarde.')
+      task => this.task = task,
+      error => alert('Ocorreu um erro no servidor, tente mais tarde.')
       );
   }
 
   public goBack(): void {
     this.location.back();
+  }
+
+  public updateTask(): void {
+    if (!this.task.title) {
+      alert('Informe um título');
+    } else {
+      this.taskService.updateTask(this.task)
+        .subscribe(
+          () => alert('Tarefa atualizada com sucesso.'),
+          () => alert('Ocorreu um erro no servidor, tente novamente mais tarde.')
+        )
+    }
   }
 }
