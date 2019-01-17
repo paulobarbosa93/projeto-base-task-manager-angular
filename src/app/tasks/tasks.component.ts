@@ -32,14 +32,23 @@ export class TasksComponent implements OnInit {
     } else {
       this.taskService.createTask(this.newTask)
         .subscribe(
-          (task) => {
-            this.tasks.push(task);
-            this.newTask = new Task(null, '');
-          },
-          () => alert('Ocorreu um erro no servidor, tente mais tarde.')
+        (task) => {
+          this.tasks.push(task);
+          this.newTask = new Task(null, '');
+        },
+        () => alert('Ocorreu um erro no servidor, tente mais tarde.')
         );
     }
+  }
 
+  public deleteTask(task: Task): void {
+    if (confirm(`Deseja realmente exluir a tarefa "${task.title}?"`)) {
+      this.taskService.deleteTask(task.id)
+        .subscribe(
+        () => this.tasks = this.tasks.filter(t => t !== task),
+        () => alert('Ocorreu um erro no servidor.')
+        );
+    }
   }
 
 }

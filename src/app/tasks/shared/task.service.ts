@@ -23,8 +23,8 @@ export class TaskService {
 
   public getImportantTasks(): Observable<Task[]> {
     return this.getTasks()
-    .catch(this.handlerErrors)
-    .map(tasks => tasks.slice(0, 3));
+      .catch(this.handlerErrors)
+      .map(tasks => tasks.slice(0, 3));
   }
 
   public getTask(id: number): Observable<Task> {
@@ -37,9 +37,9 @@ export class TaskService {
 
   public createTask(task: Task): Observable<Task> {
     let body = JSON.stringify(task);
-    let headers = new Headers({'Content-Type': 'application/json'});
+    let headers = new Headers({ 'Content-Type': 'application/json' });
 
-    return this.http.post(this.tasksUrl, body, {headers: headers})
+    return this.http.post(this.tasksUrl, body, { headers: headers })
       .catch(this.handlerErrors)
       .map(response => response.json().data as Task);
   }
@@ -47,14 +47,23 @@ export class TaskService {
   public updateTask(task: Task): Observable<Task> {
     let url = `${this.tasksUrl}/${task.id}`;
     let body = JSON.stringify(task);
-    let headers = new Headers({'Content-Type': 'application/json'});
+    let headers = new Headers({ 'Content-Type': 'application/json' });
 
-    return this.http.put(url, body, {headers: headers})
+    return this.http.put(url, body, { headers: headers })
       .catch(this.handlerErrors)
       .map(() => task);
   }
 
-  private handlerErrors(error: Response){
+  public deleteTask(id: number): Observable<null> {
+    let url = `${this.tasksUrl}/${id}`;
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+
+    return this.http.delete(url)
+      .catch(this.handlerErrors)
+      .map(() => null);
+  }
+
+  private handlerErrors(error: Response) {
     console.log('Salvando o erro em um arquivo de log =>', error);
     return Observable.throw(error);
   }
