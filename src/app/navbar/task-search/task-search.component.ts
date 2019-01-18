@@ -10,4 +10,8 @@ import { TaskService } from '../../tasks/shared/task.service';
 
 export class TaskSearchComponent {
   public constructor(private taskService: TaskService) { }
+
+  public search(term: string): void {
+    console.log(term);
+  }
 }

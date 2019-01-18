@@ -1,6 +1,6 @@
 <div style="position: relative;">
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="Busca de Tarefas">
+    <input #searchInput type="text" class="form-control" placeholder="Busca de Tarefas" (keyup)="search(searchInput.value)">
   </div>
 
   <div class="list-group" style="position: absolute;width: 100%;left: 0;top: 35px;z-index: 1000;">
