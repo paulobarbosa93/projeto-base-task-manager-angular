@@ -3,10 +3,7 @@
     <input #searchInput type="text" class="form-control" placeholder="Busca de Tarefas" (keyup)="search(searchInput.value)">
   </div>
 
-  <div class="list-group" style="position: absolute;width: 100%;left: 0;top: 35px;z-index: 1000;">
-    <a href="#" class="list-group-item">Tarefa 1</a>
-    <a href="#" class="list-group-item">Tarefa 2</a>
-    <a href="#" class="list-group-item">Tarefa 3</a>
-    <a href="#" class="list-group-item">Tarefa 4</a>
+  <div *ngIf="tasks" class="list-group" style="position: absolute;width: 100%;left: 0;top: 35px;z-index: 1000;">
+    <a (click)="goToTask(task)" *ngFor="let task of tasks" class="list-group-item" style="cursor: pointer;">{{ task.title }}</a>
   </div>
 </div>
