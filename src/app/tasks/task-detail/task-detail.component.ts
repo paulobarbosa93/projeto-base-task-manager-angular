@@ -46,15 +46,11 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
   }
 
   public updateTask(): void {
-    if (!this.task.title) {
-      alert('Informe um título');
-    } else {
-      this.taskService.update(this.task)
-        .subscribe(
-          () => alert('Tarefa atualizada com sucesso.'),
-          () => alert('Ocorreu um erro no servidor, tente novamente mais tarde.')
-        )
-    }
+    this.taskService.update(this.task)
+      .subscribe(
+        () => alert('Tarefa atualizada com sucesso.'),
+        () => alert('Ocorreu um erro no servidor, tente novamente mais tarde.')
+      )
   }
 
   public showFieldError(field): boolean {
