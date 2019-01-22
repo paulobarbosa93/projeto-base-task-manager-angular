@@ -29,7 +29,11 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
       title: [null],
       deadline: [null],
       done: [null],
-      description: [null]
+      description: [null],
+      user: this.formBuilder.group({
+        name: ['João Carlos'],
+        email: ['joaocarlos@gmail.com']
+      })
     });
   }
 
