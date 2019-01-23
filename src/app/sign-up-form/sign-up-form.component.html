@@ -39,6 +39,7 @@
         <input type="password" class="form-control" id="passwordConfirmation" formControlName="passwordConfirmation">
         <div *ngIf="formUtils.showFieldError('passwordConfirmation')" class="text-danger">
           <div *ngIf="form.get('passwordConfirmation').errors.required">a confirmação de senha é obrigatória</div>
+          <div *ngIf="form.get('passwordConfirmation').errors.mismatch">As senhas não conferem</div>
         </div>
       </div>
     </div>
