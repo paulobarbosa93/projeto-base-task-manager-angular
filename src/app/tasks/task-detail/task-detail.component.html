@@ -2,6 +2,7 @@
 
 <form [formGroup]="reactiveTaskForm" (ngSubmit)="updateTask()">
   <div class="row">
+    <!-- taskTitle -->
     <div class="form-group col-md-6" [ngClass]="fieldClassForErrorOrSuccess('title')">
       <label for="title" class="control-label">Título</label>
       <input type="text" formControlName="title" class="form-control" id="title">
@@ -11,11 +12,15 @@
         <div *ngIf="getField('title').errors.maxlength">o título deve ter no máximo 255 caracteres</div>
       </div>
     </div>
+
+    <!-- taskDeadline -->
     <div class="form-group col-md-3 has-feedback" [class.has-error]="showFieldError('deadline')" [class.has-success]="getField('deadline').valid">
       <label for="deadline" class="control-label">Prazo de Entrega</label>
       <input type="text" formControlName="deadline" class="form-control" id="deadline">
       <div *ngIf="showFieldError('deadline')" class="text-danger">prazo é obrigatório</div>
     </div>
+
+    <!-- taskDone -->
     <div class="form-group col-md-3 has-feedback" [class.has-error]="showFieldError('done')" [class.has-success]="getField('done').valid">
       <label for="done" class="control-label">Situação</label>
       <select class="form-control" id="done" formControlName="done">
@@ -24,6 +29,8 @@
       <div *ngIf="showFieldError('done')" class="text-danger">situação é obrigatório</div>
     </div>
   </div>
+
+  <!-- taskDescription -->
   <div class="row">
     <div class="form-group col-md-12">
       <label for="description" class="control-label">Descrição</label>
