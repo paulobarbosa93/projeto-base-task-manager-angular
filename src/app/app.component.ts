@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+import { Angular2TokenService } from 'angular2-token'
 import { LearningObservables } from './learning-observables.service'
 
 @Component({
@@ -12,7 +13,12 @@ import { LearningObservables } from './learning-observables.service'
 export class AppComponent {
   title = 'Gerenciador de Tarefas';
 
-  public constructor(private learningObservables: LearningObservables){
-
+  public constructor(
+    private learningObservables: LearningObservables,
+    private tokenService: Angular2TokenService
+  ) {
+    this.tokenService.init({
+      apiBase: 'http://api.task-manager.test:3004'
+    });
   }
 }
