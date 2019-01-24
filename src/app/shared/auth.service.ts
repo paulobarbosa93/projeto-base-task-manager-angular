@@ -26,7 +26,7 @@ export class AuthService {
     // returns a Observable<Response>
   }
 
-  public isSignedIn() {
+  public userSignedIn() {
     // call Angular2-Token userSignedIn method
     // returns a boolean
   }
