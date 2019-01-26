@@ -17,8 +17,13 @@ export class AuthService {
   }
 
   public signIn(uid: string, password: string) {
-    // call Angular2-Token signIn method
-    // returns a Observable<Response>
+    let signInData = {
+      email: uid,
+      password: password
+    };
+
+    return this.tokenService.signIn(signInData)
+      .catch(this.handlerErrors);
   }
 
   public signOut(): Observable<Response> {
