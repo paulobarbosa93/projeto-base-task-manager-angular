@@ -1,22 +1,40 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 
+import { Angular2TokenService } from 'angular2-token';
 import { Task } from './task.model';
 
 @Injectable()
 
 export class TaskService {
-  public tasksUrl = 'api/tasks';
-  public headers = new Headers({ 'Content-Type': 'application/json' });
+  public tasksUrl = 'tasks';
 
-  public constructor(private http: Http) { }
+  public constructor(private tokenHttp: Angular2TokenService) { }
 
   public getAll(): Observable<Task[]> {
-    return this.http.get(this.tasksUrl)
+    let url = `${this.tasksUrl}?q[s]=updated_at+DESC`
+
+    return this.tokenHttp.get(url)
       .catch(this.handlerErrors)
-      .map((response: Response) => response.json().data as Task[]);
+      .map((response: Response) => {
+        let collection = response.json().data as Array<any>;
+        let tasks: Task[] = [];
+
+        collection.forEach(item => {
+          let task = new Task(
+            item.id,
+            item.attributes.title,
+            item.attributes.description,
+            item.attributes.done,
+            item.attributes.deadline
+          );
+
+          tasks.push(task);
+        });
+
+        return tasks;
+      });
   }
 
   public getImportants(): Observable<Task[]> {
@@ -37,7 +55,7 @@ export class TaskService {
     let body = JSON.stringify(task);
 
 
-    return this.http.post(this.tasksUrl, body, { headers: this.headers })
+    return this.http.post(this.tasksUrl, body)
       .catch(this.handlerErrors)
       .map(response => response.json().data as Task);
   }
@@ -46,7 +64,7 @@ export class TaskService {
     let url = `${this.tasksUrl}/${task.id}`;
     let body = JSON.stringify(task);
 
-    return this.http.put(url, body, { headers: this.headers })
+    return this.http.put(url, body)
       .catch(this.handlerErrors)
       .map(() => task);
   }
