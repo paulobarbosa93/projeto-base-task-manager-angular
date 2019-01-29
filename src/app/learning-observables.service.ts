@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 // errors
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
-import 'rxjs/add/Observable/throw';
+import 'rxjs/add/observable/throw';
 
 @Injectable()
 
