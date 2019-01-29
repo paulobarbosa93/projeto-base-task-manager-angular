@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
-import { Angular2TokenService } from 'angular2-token'
-import { LearningObservables } from './learning-observables.service'
+import { TokenService } from './shared/token.service';
+import { LearningObservables } from './learning-observables.service';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +15,7 @@ export class AppComponent {
 
   public constructor(
     private learningObservables: LearningObservables,
-    private tokenService: Angular2TokenService
+    private tokenService: TokenService
   ) {
     this.tokenService.init({
       apiBase: 'http://api.task-manager.test:3004',
