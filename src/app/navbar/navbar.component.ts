@@ -14,11 +14,11 @@ export class NavbarComponent {
   public signOutUser() {
     this.authService.signOut()
       .subscribe(
-        () => this.router.navigate(['/sign-in'])
+      () => this.router.navigate(['/sign-in'])
       );
   }
 
-  public userSignedIn(){
+  public userSignedIn() {
     return this.authService.userSignedIn();
   }
 }
